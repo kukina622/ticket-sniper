@@ -10,9 +10,18 @@
     "esModuleInterop": true,
     "noImplicitAny": true,
     "sourceMap": true,
-    "baseUrl": ".",
     "outDir": "dist",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src/renderer.tsx", "vite.renderer.config.ts", "*.d.ts"]
+  "include": [
+    "src/renderer.tsx",
+    "vite.renderer.config.ts",
+    "*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
 }
