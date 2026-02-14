@@ -1,11 +1,24 @@
+import { useMemo } from "react";
+import { useParams } from "react-router";
+import TaskForm from "@/components/platform/task-form";
+import { platformAdapterMapping } from "@/core/platforms";
+
 export default function NewTaskTab() {
+  const { platformId } = useParams();
+
+  const platformAdapter = useMemo(
+    () => platformAdapterMapping[platformId],
+    [platformId]
+  );
+
+  const sections = useMemo(
+    () => platformAdapter?.getSections() ?? [],
+    [platformAdapter]
+  );
+
   return (
-    <div className="p-6">
-      <h3 className="text-lg font-semibold mb-4">新建任務</h3>
-      <p className="text-muted-foreground">
-        在此處配置新任務的詳細信息和參數。
-      </p>
-      {/* 這裏可以添加新任務的表單或相關組件 */}
+    <div className="grid lg:grid-cols-2 gap-6">
+      <TaskForm sections={sections} values={{}} setValue={() => {}} />
     </div>
   );
 }
