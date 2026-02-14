@@ -1,0 +1,20 @@
+export type FieldType = 'text' | 'number' | 'date' | 'time' | 'email' | 'switch'
+
+export type FieldDef<T> = {
+  name: keyof T
+  label: React.ReactNode
+  type: FieldType
+  placeholder?: string
+  required?: boolean
+  min?: number
+  max?: number
+  step?: number
+  when?: (values: T) => boolean
+}
+
+export type SectionDef<T> = {
+  key: string
+  title: string
+  icon?: React.ReactNode
+  fields: FieldDef<T>[]
+}
