@@ -24,7 +24,7 @@ export default function Dashboard() {
             platform={platform}
             taskCount={Math.floor(Math.random() * 10)}
             onSelect={() => {
-              navigate(`/platform/${platform.id}`);
+              navigate(`/platform/${platform.id}/new`);
             }}
             key={platform.id}
           />
