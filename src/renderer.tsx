@@ -3,6 +3,7 @@ import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router";
 import RootLayout from "./components/root-layout";
 import App from "./pages/app";
+import Dashboard from "./pages/dashboard";
 
 const container = document.getElementById("root");
 // biome-ignore lint/style/noNonNullAssertion: <!-- Ignore because we are sure that the container element exists -->
@@ -11,7 +12,9 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route element={<App />}>
-        <Route index element={<RootLayout />}></Route>
+        <Route element={<RootLayout />}>
+          <Route index path="/" element={<Dashboard />} />
+        </Route>
       </Route>
     </Routes>
   </BrowserRouter>
