@@ -1,5 +1,6 @@
 import { LayoutDashboard, ListChecks, Settings } from "lucide-react";
 import { Outlet } from "react-router";
+import AppHeader from "./app-header";
 import AppSidebar from "./app-sidebar";
 
 export default function RootLayout() {
@@ -16,7 +17,10 @@ export default function RootLayout() {
         currentView={"dashboard"}
         onNavigate={(view) => {}}
       />
-      <Outlet />
+      <main className="flex-1 flex flex-col overflow-hidden">
+        <AppHeader />
+        <Outlet />
+      </main>
     </div>
   );
 }
