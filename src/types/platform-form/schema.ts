@@ -17,4 +17,7 @@ export type SectionDef<T> = {
   title: string
   icon?: React.ReactNode
   fields: Array<FieldDef<T> | FieldDef<T>[]>
+  layout?: {
+    column?: 'left' | 'right' | 'full'
+  }
 }

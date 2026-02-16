@@ -1,4 +1,4 @@
-import { Calendar, Clock, MapPin, Ticket, User } from "lucide-react";
+import { Calendar, Clock, MapPin, Settings2, Ticket, User } from "lucide-react";
 import type { SectionDef } from "@/types/platform-form/schema";
 import type { TixcraftTaskConfig } from "./config";
 
@@ -7,6 +7,7 @@ export const tixcraftSections: SectionDef<TixcraftTaskConfig>[] = [
     key: "event",
     title: "活動資訊",
     icon: <Ticket className="h-4 w-4 text-primary" />,
+    layout: { column: "left" },
     fields: [
       {
         name: "eventUrl",
@@ -71,6 +72,7 @@ export const tixcraftSections: SectionDef<TixcraftTaskConfig>[] = [
     key: "buyer",
     title: "購票人資料",
     icon: <User className="h-4 w-4 text-primary" />,
+    layout: { column: "right" },
     fields: [
       { name: "autoFill", label: "自動填寫", type: "switch" },
       {
@@ -97,6 +99,30 @@ export const tixcraftSections: SectionDef<TixcraftTaskConfig>[] = [
         type: "email",
         placeholder: "example@mail.com"
       }
+    ]
+  },
+  {
+    key: "advanced",
+    title: "進階設定",
+    icon: <Settings2 className="h-4 w-4 text-primary" />,
+    layout: { column: "right" },
+    fields: [
+      [
+        {
+          name: "refreshInterval",
+          label: "刷新間隔 (ms)",
+          type: "number",
+          min: 100,
+          step: 100,
+          
+        },
+        {
+          name: "maxRetries",
+          label: "最大重試次數",
+          type: "number",
+          min: 1
+        }
+      ]
     ]
   }
 ];
