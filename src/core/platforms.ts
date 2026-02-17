@@ -1,6 +1,7 @@
 import type { TicketPlatform } from '@/types/platform'
 import type { PlatformAdapter } from '@/types/platform-form/adapter'
 import { tixcraftAdapter } from './tixcraft/adapter'
+import type { TixcraftTaskConfig } from './tixcraft/config'
 
 export const platforms: TicketPlatform[] = [
   {
@@ -15,6 +16,19 @@ export const platforms: TicketPlatform[] = [
   },
 ]
 
-export const platformAdapterMapping: Record<string, PlatformAdapter<any>> = {
+type PlatformAdapterMapping = {
+  tixcraft: PlatformAdapter<TixcraftTaskConfig>
+}
+
+export const platformAdapterMapping: PlatformAdapterMapping = {
   tixcraft: tixcraftAdapter,
 }
+
+export type PlatformId = keyof PlatformAdapterMapping
+export type PlatformConfig =
+  PlatformAdapterMapping[PlatformId] extends PlatformAdapter<infer TConfig>
+    ? TConfig
+    : never
+
+export const isPlatformId = (id: string): id is PlatformId =>
+  id in platformAdapterMapping

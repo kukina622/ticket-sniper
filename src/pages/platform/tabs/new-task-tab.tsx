@@ -3,13 +3,18 @@ import { useMemo, useState } from "react";
 import { useParams } from "react-router";
 import TaskForm from "@/components/platform/task-form";
 import { Button } from "@/components/shadcn-ui/button";
-import { platformAdapterMapping } from "@/core/platforms";
+import {
+  isPlatformId,
+  type PlatformConfig,
+  platformAdapterMapping
+} from "@/core/platforms";
 
 export default function NewTaskTab() {
   const { platformId } = useParams();
 
   const platformAdapter = useMemo(
-    () => platformAdapterMapping[platformId],
+    () =>
+      isPlatformId(platformId) ? platformAdapterMapping[platformId] : undefined,
     [platformId]
   );
 
@@ -18,10 +23,15 @@ export default function NewTaskTab() {
     [platformAdapter]
   );
 
-  const [config, setConfig] = useState(platformAdapter?.getDefaultConfig());
+  const [config, setConfig] = useState<PlatformConfig | undefined>(
+    platformAdapter?.getDefaultConfig()
+  );
 
-  const onFieldChange = (name: string | number | symbol, value: any) => {
-    setConfig((prev: any) => ({ ...prev, [name]: value }));
+  const onFieldChange = <K extends keyof PlatformConfig>(
+    name: K,
+    value: PlatformConfig[K]
+  ) => {
+    setConfig((prev) => (prev ? { ...prev, [name]: value } : prev));
   };
 
   return (
