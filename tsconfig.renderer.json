@@ -18,7 +18,7 @@
     }
   },
   "include": [
-    "src/renderer/index.tsx",
+    "src/renderer/renderer.tsx",
     "vite.renderer.config.ts",
     "*.d.ts",
     "src/**/*.ts",
