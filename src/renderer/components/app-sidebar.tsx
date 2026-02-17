@@ -1,6 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import { Swords } from "lucide-react";
-import { cn } from "@/utils/cn";
+import { cn } from "@/renderer/utils/cn";
 
 type View = string;
 

@@ -1,7 +1,7 @@
 import { Activity } from "lucide-react";
 import { useNavigate } from "react-router";
-import { PlatformCard } from "@/components/platform/platform-card";
 import { platforms } from "@/core/platforms";
+import { PlatformCard } from "@/renderer/components/platform/platform-card";
 
 export default function Dashboard() {
   const navigate = useNavigate();

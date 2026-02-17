@@ -1,9 +1,9 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: <> */
 import { useMemo } from "react";
-import AppCard from "@/components/common/app-card";
-import { Input } from "@/components/shadcn-ui/input";
-import { Label } from "@/components/shadcn-ui/label";
-import { Switch } from "@/components/shadcn-ui/switch";
+import AppCard from "@/renderer/components/common/app-card";
+import { Input } from "@/renderer/components/shadcn-ui/input";
+import { Label } from "@/renderer/components/shadcn-ui/label";
+import { Switch } from "@/renderer/components/shadcn-ui/switch";
 import type { SectionDef } from "@/types/platform-form/schema";
 
 type TaskFormProps<T> = {

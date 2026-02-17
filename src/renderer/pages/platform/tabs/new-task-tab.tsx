@@ -1,13 +1,13 @@
 import { Play, RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useParams } from "react-router";
-import TaskForm from "@/components/platform/task-form";
-import { Button } from "@/components/shadcn-ui/button";
 import {
   isPlatformId,
   type PlatformConfig,
   platformAdapterMapping
 } from "@/core/platforms";
+import TaskForm from "@/renderer/components/platform/task-form";
+import { Button } from "@/renderer/components/shadcn-ui/button";
 
 export default function NewTaskTab() {
   const { platformId } = useParams();

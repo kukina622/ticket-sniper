@@ -113,8 +113,7 @@ export const tixcraftSections: SectionDef<TixcraftTaskConfig>[] = [
           label: "刷新間隔 (ms)",
           type: "number",
           min: 100,
-          step: 100,
-          
+          step: 100
         },
         {
           name: "maxRetries",

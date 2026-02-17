@@ -1,8 +1,12 @@
 import { ArrowLeft, Globe, Plus, Settings2, Zap } from "lucide-react";
 import { Outlet, useNavigate, useParams } from "react-router";
-import { Button } from "@/components/shadcn-ui/button";
-import { Tabs, TabsList, TabsTrigger } from "@/components/shadcn-ui/tabs";
 import { platforms } from "@/core/platforms";
+import { Button } from "@/renderer/components/shadcn-ui/button";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger
+} from "@/renderer/components/shadcn-ui/tabs";
 
 export default function PlatformLayout() {
   const { platformId } = useParams();
