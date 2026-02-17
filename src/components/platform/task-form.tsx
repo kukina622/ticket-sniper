@@ -1,6 +1,6 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: <> */
 import { useMemo } from "react";
-import AppCard from "@/components/app-card";
+import AppCard from "@/components/common/app-card";
 import { Input } from "@/components/shadcn-ui/input";
 import { Label } from "@/components/shadcn-ui/label";
 import { Switch } from "@/components/shadcn-ui/switch";
