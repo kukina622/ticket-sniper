@@ -1,5 +1,6 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: <> */
 import { useMemo } from "react";
+import AppCard from "@/components/app-card";
 import { Input } from "@/components/shadcn-ui/input";
 import { Label } from "@/components/shadcn-ui/label";
 import { Switch } from "@/components/shadcn-ui/switch";
@@ -27,12 +28,12 @@ export default function TaskForm<T>({
   const defaultSections = sections.filter((s) => !s.layout?.column);
 
   const renderSection = (section: SectionDef<T>) => (
-    <div className="rounded-lg border bg-card p-4" key={section.key}>
-      <h3 className="text-sm font-medium mb-4 flex items-center gap-2">
+    <AppCard key={section.key}>
+      <AppCard.Header>
         {section.icon}
-        {section.title}
-      </h3>
-      <div className="grid gap-3">
+        <AppCard.Title>{section.title}</AppCard.Title>
+      </AppCard.Header>
+      <AppCard.Content className="grid gap-3">
         {section.fields.map((item, idx) => {
           const row = Array.isArray(item) ? item : [item];
           const visibleRow = row.filter(
@@ -104,8 +105,8 @@ export default function TaskForm<T>({
             </div>
           );
         })}
-      </div>
-    </div>
+      </AppCard.Content>
+    </AppCard>
   );
 
   return (
