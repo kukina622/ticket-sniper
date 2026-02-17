@@ -5,16 +5,16 @@
   "tsx": true,
   "tailwind": {
     "config": "",
-    "css": "src/index.css",
+    "css": "src/renderer/index.css",
     "baseColor": "neutral",
     "cssVariables": true,
     "prefix": ""
   },
   "aliases": {
-    "components": "@/components",
-    "utils": "@/utils/cn",
-    "ui": "@/components/shadcn-ui",
-    "hooks": "@/hooks"
+    "components": "@/renderer/components",
+    "utils": "@/renderer/utils/cn",
+    "ui": "@/renderer/components/shadcn-ui",
+    "hooks": "@/renderer/hooks"
   },
   "iconLibrary": "lucide"
 }
