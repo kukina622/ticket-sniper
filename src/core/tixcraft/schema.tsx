@@ -2,7 +2,7 @@ import { Calendar, Clock, MapPin, Settings2, Ticket, User } from "lucide-react";
 import type { SectionDef } from "@/types/platform-form/schema";
 import type { TixcraftTaskConfig } from "./config";
 
-export const tixcraftSections: SectionDef<TixcraftTaskConfig>[] = [
+export const tixcraftTaskSections: SectionDef<TixcraftTaskConfig>[] = [
   {
     key: "event",
     title: "活動資訊",
@@ -122,6 +122,24 @@ export const tixcraftSections: SectionDef<TixcraftTaskConfig>[] = [
           min: 1
         }
       ]
+    ]
+  }
+];
+
+export const tixcraftAuthSections: SectionDef<{ sid: string }>[] = [
+  {
+    key: "auth",
+    title: "驗證資訊",
+    icon: <User className="h-4 w-4 text-primary" />,
+    layout: { column: "full" },
+    fields: [
+      {
+        name: "sid",
+        label: "tixCraft SID",
+        type: "text",
+        required: true,
+        placeholder: "從 Cookie 中取得的 SID"
+      }
     ]
   }
 ];

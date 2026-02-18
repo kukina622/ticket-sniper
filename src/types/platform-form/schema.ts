@@ -1,4 +1,11 @@
-export type FieldType = 'text' | 'number' | 'date' | 'time' | 'email' | 'switch'
+export type FieldType =
+  | 'text'
+  | 'password'
+  | 'number'
+  | 'date'
+  | 'time'
+  | 'email'
+  | 'switch'
 
 export type FieldDef<T> = {
   name: keyof T

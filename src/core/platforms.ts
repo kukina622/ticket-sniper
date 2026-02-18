@@ -1,7 +1,7 @@
 import type { TicketPlatform } from '@/types/platform'
 import type { PlatformAdapter } from '@/types/platform-form/adapter'
 import { tixcraftAdapter } from './tixcraft/adapter'
-import type { TixcraftTaskConfig } from './tixcraft/config'
+import type { TixcraftAuthConfig, TixcraftTaskConfig } from './tixcraft/config'
 
 export const platforms: TicketPlatform[] = [
   {
@@ -17,7 +17,7 @@ export const platforms: TicketPlatform[] = [
 ]
 
 type PlatformAdapterMapping = {
-  tixcraft: PlatformAdapter<TixcraftTaskConfig>
+  tixcraft: PlatformAdapter<TixcraftTaskConfig, TixcraftAuthConfig>
 }
 
 export const platformAdapterMapping: PlatformAdapterMapping = {
@@ -25,8 +25,12 @@ export const platformAdapterMapping: PlatformAdapterMapping = {
 }
 
 export type PlatformId = keyof PlatformAdapterMapping
-export type PlatformConfig =
-  PlatformAdapterMapping[PlatformId] extends PlatformAdapter<infer TConfig>
+
+export type PlatformTaskConfig =
+  PlatformAdapterMapping[PlatformId] extends PlatformAdapter<
+    infer TConfig,
+    infer AConfig
+  >
     ? TConfig
     : never
 

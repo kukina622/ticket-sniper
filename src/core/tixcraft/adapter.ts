@@ -1,12 +1,15 @@
 import type { PlatformAdapter } from '@/types/platform-form/adapter'
-import type { TixcraftTaskConfig } from './config'
-import { tixcraftSections } from './schema'
+import type { TixcraftAuthConfig, TixcraftTaskConfig } from './config'
+import { tixcraftAuthSections, tixcraftTaskSections } from './schema'
 
-export const tixcraftAdapter: PlatformAdapter<TixcraftTaskConfig> = {
+export const tixcraftAdapter: PlatformAdapter<
+  TixcraftTaskConfig,
+  TixcraftAuthConfig
+> = {
   id: 'tixcraft',
   label: 'tixCraft',
 
-  getDefaultConfig() {
+  getTaskDefaultConfig() {
     return {
       eventUrl: '',
       eventName: '',
@@ -27,7 +30,17 @@ export const tixcraftAdapter: PlatformAdapter<TixcraftTaskConfig> = {
     }
   },
 
-  getSections() {
-    return tixcraftSections
+  getTaskSections() {
+    return tixcraftTaskSections
+  },
+
+  getAuthDefaultConfig() {
+    return {
+      sid: '',
+    }
+  },
+
+  getAuthSections() {
+    return tixcraftAuthSections
   },
 }

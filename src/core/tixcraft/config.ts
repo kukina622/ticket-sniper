@@ -19,3 +19,7 @@ export type TixcraftTaskConfig = {
   refreshInterval: number
   maxRetries: number
 }
+
+export type TixcraftAuthConfig = {
+  sid: string
+}

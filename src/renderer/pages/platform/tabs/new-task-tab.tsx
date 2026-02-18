@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { useParams } from "react-router";
 import {
   isPlatformId,
-  type PlatformConfig,
+  type PlatformTaskConfig,
   platformAdapterMapping
 } from "@/core/platforms";
 import TaskForm from "@/renderer/components/platform/task-form";
@@ -19,17 +19,17 @@ export default function NewTaskTab() {
   );
 
   const sections = useMemo(
-    () => platformAdapter?.getSections() ?? [],
+    () => platformAdapter?.getTaskSections() ?? [],
     [platformAdapter]
   );
 
-  const [config, setConfig] = useState<PlatformConfig | undefined>(
-    platformAdapter?.getDefaultConfig()
+  const [config, setConfig] = useState<PlatformTaskConfig | undefined>(
+    platformAdapter?.getTaskDefaultConfig()
   );
 
-  const onFieldChange = <K extends keyof PlatformConfig>(
+  const onFieldChange = <K extends keyof PlatformTaskConfig>(
     name: K,
-    value: PlatformConfig[K]
+    value: PlatformTaskConfig[K]
   ) => {
     setConfig((prev) => (prev ? { ...prev, [name]: value } : prev));
   };
