@@ -54,7 +54,7 @@ export default function TaskForm<T>({
 
                 if (field.type === "switch") {
                   return (
-                    <div key={name} className="flex-1 min-w-0">
+                    <div key={name} className="flex-1 min-w-0 grid gap-1.5">
                       <div className="flex items-center justify-between rounded-md border px-3 py-2">
                         <span className="text-xs text-muted-foreground">
                           {field.label}
@@ -72,7 +72,7 @@ export default function TaskForm<T>({
                 }
 
                 return (
-                  <div key={name} className="flex-1 min-w-0">
+                  <div key={name} className="flex-1 min-w-0 grid gap-1.5">
                     <Label className="text-xs text-muted-foreground">
                       {field.label}
                     </Label>

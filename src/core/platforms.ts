@@ -29,9 +29,17 @@ export type PlatformId = keyof PlatformAdapterMapping
 export type PlatformTaskConfig =
   PlatformAdapterMapping[PlatformId] extends PlatformAdapter<
     infer TConfig,
-    infer AConfig
+    infer _AConfig
   >
     ? TConfig
+    : never
+
+export type PlatformAuthConfig =
+  PlatformAdapterMapping[PlatformId] extends PlatformAdapter<
+    infer _TConfig,
+    infer AConfig
+  >
+    ? AConfig
     : never
 
 export const isPlatformId = (id: string): id is PlatformId =>

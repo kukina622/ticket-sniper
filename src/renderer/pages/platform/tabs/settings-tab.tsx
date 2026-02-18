@@ -1,12 +1,41 @@
 import { ExternalLink as ExternalLinkIcon } from "lucide-react";
+import { useMemo, useState } from "react";
 import { useParams } from "react-router";
-import { platforms } from "@/core/platforms";
+import {
+  isPlatformId,
+  type PlatformAuthConfig,
+  platformAdapterMapping,
+  platforms
+} from "@/core/platforms";
 import AppCard from "@/renderer/components/common/app-card";
 import ExternalLink from "@/renderer/components/common/external-link";
+import TaskForm from "@/renderer/components/platform/task-form";
 
 export default function SettingsTab() {
   const { platformId } = useParams();
   const platform = platforms.find((p) => p.id === platformId);
+
+  const platformAdapter = useMemo(
+    () =>
+      isPlatformId(platformId) ? platformAdapterMapping[platformId] : undefined,
+    [platformId]
+  );
+
+  const sections = useMemo(
+    () => platformAdapter?.getAuthSections() ?? [],
+    [platformAdapter]
+  );
+
+  const [config, setConfig] = useState<PlatformAuthConfig | undefined>(
+    platformAdapter?.getAuthDefaultConfig()
+  );
+
+  const onFieldChange = <K extends keyof PlatformAuthConfig>(
+    name: K,
+    value: PlatformAuthConfig[K]
+  ) => {
+    setConfig((prev) => (prev ? { ...prev, [name]: value } : prev));
+  };
 
   return (
     <div className="max-w-xl space-y-4">
@@ -49,6 +78,7 @@ export default function SettingsTab() {
           </div>
         </AppCard.Content>
       </AppCard>
+      <TaskForm sections={sections} values={config} setValue={onFieldChange} />
     </div>
   );
 }

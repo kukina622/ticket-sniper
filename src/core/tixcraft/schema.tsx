@@ -135,7 +135,7 @@ export const tixcraftAuthSections: SectionDef<{ sid: string }>[] = [
     fields: [
       {
         name: "sid",
-        label: "tixCraft SID",
+        label: "SID",
         type: "text",
         required: true,
         placeholder: "從 Cookie 中取得的 SID"
