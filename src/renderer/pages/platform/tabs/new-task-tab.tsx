@@ -1,22 +1,15 @@
 import { Play, RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useParams } from "react-router";
-import {
-  isPlatformId,
-  type PlatformTaskConfig,
-  platformAdapterMapping
-} from "@/core/platforms";
+import type { PlatformTaskConfig } from "@/core/platforms";
 import TaskForm from "@/renderer/components/platform/task-form";
 import { Button } from "@/renderer/components/shadcn-ui/button";
+import usePlatformAdapter from "@/renderer/hooks/use-platform-adapter";
 
 export default function NewTaskTab() {
   const { platformId } = useParams();
 
-  const platformAdapter = useMemo(
-    () =>
-      isPlatformId(platformId) ? platformAdapterMapping[platformId] : undefined,
-    [platformId]
-  );
+  const platformAdapter = usePlatformAdapter(platformId);
 
   const sections = useMemo(
     () => platformAdapter?.getTaskSections() ?? [],

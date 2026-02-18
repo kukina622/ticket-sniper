@@ -1,25 +1,17 @@
-import { ExternalLink as ExternalLinkIcon } from "lucide-react";
+import { ExternalLink as ExternalLinkIcon, Save } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useParams } from "react-router";
-import {
-  isPlatformId,
-  type PlatformAuthConfig,
-  platformAdapterMapping,
-  platforms
-} from "@/core/platforms";
+import { type PlatformAuthConfig, platforms } from "@/core/platforms";
 import AppCard from "@/renderer/components/common/app-card";
 import ExternalLink from "@/renderer/components/common/external-link";
 import TaskForm from "@/renderer/components/platform/task-form";
+import { Button } from "@/renderer/components/shadcn-ui/button";
+import usePlatformAdapter from "@/renderer/hooks/use-platform-adapter";
 
 export default function SettingsTab() {
   const { platformId } = useParams();
   const platform = platforms.find((p) => p.id === platformId);
-
-  const platformAdapter = useMemo(
-    () =>
-      isPlatformId(platformId) ? platformAdapterMapping[platformId] : undefined,
-    [platformId]
-  );
+  const platformAdapter = usePlatformAdapter(platformId);
 
   const sections = useMemo(
     () => platformAdapter?.getAuthSections() ?? [],
@@ -79,6 +71,10 @@ export default function SettingsTab() {
         </AppCard.Content>
       </AppCard>
       <TaskForm sections={sections} values={config} setValue={onFieldChange} />
+      <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
+        <Save className="h-4 w-4 mr-2" />
+        <span>儲存設定</span>
+      </Button>
     </div>
   );
 }
