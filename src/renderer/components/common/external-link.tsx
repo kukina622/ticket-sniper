@@ -11,8 +11,9 @@ export default function ExternalLink({
   className,
   rel
 }: ExternalLinkProps) {
-  const onLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const onLinkClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    await window.api.openExternal(link);
   };
 
   return (
