@@ -35,7 +35,11 @@ export default function NewTaskTab() {
           <Play className="h-4 w-4 mr-2" />
           <span>建立搶票任務</span>
         </Button>
-        <Button variant="outline" size="icon">
+        <Button
+          variant="outline"
+          size="icon"
+          className="hover:bg-muted text-muted-foreground hover:text-foreground"
+        >
           <RotateCcw className="h-4 w-4" />
         </Button>
       </div>

@@ -31,7 +31,7 @@ export default function PlatformLayout() {
             variant="ghost"
             size="sm"
             onClick={() => navigate("/")}
-            className="text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
             返回
