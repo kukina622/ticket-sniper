@@ -184,7 +184,7 @@ export default function TaskCard({
                 <Button
                   variant="outline"
                   size="sm"
-                  className="h-7 text-xs text-destructive hover:text-destructive bg-transparent hover:bg-destructive/50"
+                  className="h-7 text-xs text-destructive hover:text-destructive bg-transparent hover:bg-destructive/30"
                 >
                   <Square className="h-3 w-3 mr-1" />
                   停止任務
