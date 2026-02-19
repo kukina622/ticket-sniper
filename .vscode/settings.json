@@ -7,5 +7,13 @@
   "editor.defaultFormatter": "biomejs.biome",
   "[typescript]": {
     "editor.defaultFormatter": "biomejs.biome"
-  }
+  },
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    { "text": "Write commit messages in English." },
+    { "text": "Follow the structure: `<type>: <subject>`." },
+    {
+      "text": "Use the following types: feat, fix, docs, style, refactor, perf, test, chore, revert."
+    },
+    { "text": "Keep the subject concise (max 50 characters, no period)." }
+  ]
 }
