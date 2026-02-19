@@ -1,7 +1,7 @@
 import type { TicketTask } from '@/types/task'
 
 // Dummy Task Data
-export const DummyTasks: TicketTask[] = [
+export const dummyTasks: TicketTask[] = [
   {
     id: 'task-1',
     platformId: 'tixcraft',

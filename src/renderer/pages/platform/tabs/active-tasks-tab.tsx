@@ -2,7 +2,7 @@ import { Ticket } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import { platforms } from "@/core/platforms";
-import { DummyTasks } from "@/core/tasks";
+import { dummyTasks } from "@/core/tasks";
 import TaskCard from "@/renderer/components/platform/task-card";
 import type { TicketPlatform } from "@/types/platform";
 import type { TicketTask } from "@/types/task";
@@ -50,7 +50,7 @@ export default function ActiveTasksTab() {
   const platform = platforms.find((p) => p.id === platformId);
 
   const platformTasks = useMemo(
-    () => DummyTasks.filter((task) => task.platformId === platformId),
+    () => dummyTasks.filter((task) => task.platformId === platformId),
     [platformId]
   );
 
