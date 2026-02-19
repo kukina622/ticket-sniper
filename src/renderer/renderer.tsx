@@ -8,6 +8,8 @@ import PlatformLayout from "./pages/platform/platform-layout";
 import ActiveTasksTab from "./pages/platform/tabs/active-tasks-tab";
 import NewTaskTab from "./pages/platform/tabs/new-task-tab";
 import SettingsTab from "./pages/platform/tabs/settings-tab";
+import TaskManager from "./pages/task-manager";
+import GlobalSettings from "./pages/global-settings";
 
 const container = document.getElementById("root");
 // biome-ignore lint/style/noNonNullAssertion: <!-- Ignore because we are sure that the container element exists -->
@@ -23,6 +25,8 @@ root.render(
             <Route path="running" element={<ActiveTasksTab />} />
             <Route path="settings" element={<SettingsTab />} />
           </Route>
+          <Route path="/task-manager" element={<TaskManager />} />
+          <Route path="/global-settings" element={<GlobalSettings />} />
         </Route>
       </Route>
     </Routes>

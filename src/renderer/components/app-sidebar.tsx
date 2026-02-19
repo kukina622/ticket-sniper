@@ -4,10 +4,11 @@ import { cn } from "@/renderer/utils/cn";
 
 type View = string;
 
-interface NavItem {
+export interface NavItem {
   id: string;
   label: string;
   icon: LucideIcon;
+  path: string;
 }
 
 interface AppSidebarProps {
