@@ -1,8 +1,9 @@
 import { Ticket } from "lucide-react";
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import { platforms } from "@/core/platforms";
 import TaskCard from "@/renderer/components/platform/task-card";
+import type { TicketPlatform } from "@/types/platform";
 import type { TicketTask } from "@/types/task";
 
 const tasks: TicketTask[] = [
@@ -27,6 +28,43 @@ const tasks: TicketTask[] = [
     ]
   }
 ];
+
+type TaskListProps = {
+  platformTasks: TicketTask[];
+  platform?: TicketPlatform;
+};
+
+function TaskList({ platformTasks, platform }: TaskListProps) {
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(
+    () => new Set(platformTasks.map((task) => task.id))
+  );
+
+  const handleToggle = useCallback((taskId: string) => {
+    setExpandedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(taskId)) {
+        next.delete(taskId);
+      } else {
+        next.add(taskId);
+      }
+      return next;
+    });
+  }, []);
+
+  return (
+    <div className="grid gap-3">
+      {platformTasks.map((task) => (
+        <TaskCard
+          key={task.id}
+          task={task}
+          platform={platform}
+          isExpanded={expandedIds.has(task.id)}
+          onToggle={() => handleToggle(task.id)}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function ActiveTasksTab() {
   const { platformId } = useParams();
@@ -53,10 +91,10 @@ export default function ActiveTasksTab() {
   }
 
   return (
-    <div className="grid gap-3">
-      {platformTasks.map((task) => (
-        <TaskCard key={task.id} task={task} platform={platform} />
-      ))}
-    </div>
+    <TaskList
+      key={platformId}
+      platformTasks={platformTasks}
+      platform={platform}
+    />
   );
 }

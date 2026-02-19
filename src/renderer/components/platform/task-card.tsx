@@ -82,7 +82,7 @@ export default function TaskCard({
       <button
         type="button"
         onClick={onToggle}
-        className="flex items-center w-full px-4 py-3 text-left hover:bg-secondary/50 transition-colors"
+        className="flex items-center w-full px-4 py-3 text-left hover:bg-secondary/50 transition-colors cursor-pointer"
       >
         <div className="flex items-center gap-3 flex-1 min-w-0">
           {isExpanded ? (
@@ -215,7 +215,7 @@ export default function TaskCard({
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-7 text-xs bg-muted text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
+                className="h-7 text-xs border border-muted text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
               >
                 <Trash2 className="h-3 w-3 mr-1" />
                 刪除
