@@ -1,7 +1,21 @@
 import { Pause, Trash2 } from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/renderer/components/shadcn-ui/button";
+import { cn } from "@/renderer/utils/cn";
+import type { TicketTask } from "@/types/task";
+
+type FilterStatus = "all" | TicketTask["status"];
+const filters: { id: FilterStatus; label: string }[] = [
+  { id: "all", label: "全部" },
+  { id: "running", label: "執行中" },
+  { id: "waiting", label: "等待中" },
+  { id: "success", label: "已成功" },
+  { id: "failed", label: "已失敗" }
+];
 
 export default function TaskManager() {
+  const [filter, setFilter] = useState<FilterStatus>("all");
+
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
@@ -30,7 +44,23 @@ export default function TaskManager() {
           </Button>
         </div>
       </div>
-      <div className="flex items-center gap-1.5 mb-4 border-b pb-3"></div>
+      <div className="flex items-center gap-1.5 mb-4 border-b pb-3">
+        {filters.map((f) => (
+          <button
+            key={f.id}
+            type="button"
+            onClick={() => setFilter(f.id)}
+            className={cn(
+              "flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md transition-colors cursor-pointer",
+              filter === f.id
+                ? "bg-primary/15 text-primary"
+                : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            {f.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
