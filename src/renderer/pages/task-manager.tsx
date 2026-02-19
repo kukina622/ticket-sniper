@@ -1,10 +1,13 @@
 import { Pause, Ticket, Trash2 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+import { platforms } from "@/core/platforms";
 import { dummyTasks } from "@/core/tasks";
 import TaskCard from "@/renderer/components/platform/task-card";
 import { Button } from "@/renderer/components/shadcn-ui/button";
 import { cn } from "@/renderer/utils/cn";
 import type { TicketTask } from "@/types/task";
+
+const platformMap = new Map(platforms.map((p) => [p.id, p]));
 
 type FilterStatus = "all" | TicketTask["status"];
 const filters: { id: FilterStatus; label: string }[] = [
@@ -23,10 +26,22 @@ export default function TaskManager() {
     return dummyTasks.filter((task) => task.status === filter);
   }, [filter]);
 
-  const [expandedTaskId, setExpandedTaskId] = useState<string | null>(null);
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
+
+  const handleToggle = useCallback((taskId: string) => {
+    setExpandedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(taskId)) {
+        next.delete(taskId);
+      } else {
+        next.add(taskId);
+      }
+      return next;
+    });
+  }, []);
 
   return (
-    <div className="p-6">
+    <div className="p-6 overflow-y-auto">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-lg font-semibold">任務管理</h2>
@@ -71,17 +86,19 @@ export default function TaskManager() {
         ))}
       </div>
       <div className="grid gap-2">
-        {filteredTasks.map((task) => (
-          <TaskCard
-            key={task.id}
-            task={task}
-            isExpanded={expandedTaskId === task.id}
-            onToggle={() =>
-              setExpandedTaskId(expandedTaskId === task.id ? null : task.id)
-            }
-            platform={undefined}
-          />
-        ))}
+        {filteredTasks.map((task) => {
+          const platform = platformMap.get(task.platformId);
+          if (!platform) return null;
+          return (
+            <TaskCard
+              key={task.id}
+              task={task}
+              isExpanded={expandedIds.has(task.id)}
+              onToggle={() => handleToggle(task.id)}
+              platform={platform}
+            />
+          );
+        })}
       </div>
 
       {filteredTasks.length === 0 && (
