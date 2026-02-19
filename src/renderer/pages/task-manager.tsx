@@ -1,5 +1,7 @@
-import { Pause, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { Pause, Ticket, Trash2 } from "lucide-react";
+import { useMemo, useState } from "react";
+import { dummyTasks } from "@/core/tasks";
+import TaskCard from "@/renderer/components/platform/task-card";
 import { Button } from "@/renderer/components/shadcn-ui/button";
 import { cn } from "@/renderer/utils/cn";
 import type { TicketTask } from "@/types/task";
@@ -15,6 +17,13 @@ const filters: { id: FilterStatus; label: string }[] = [
 
 export default function TaskManager() {
   const [filter, setFilter] = useState<FilterStatus>("all");
+
+  const filteredTasks = useMemo(() => {
+    if (filter === "all") return dummyTasks;
+    return dummyTasks.filter((task) => task.status === filter);
+  }, [filter]);
+
+  const [expandedTaskId, setExpandedTaskId] = useState<string | null>(null);
 
   return (
     <div className="p-6">
@@ -61,6 +70,26 @@ export default function TaskManager() {
           </button>
         ))}
       </div>
+      <div className="grid gap-2">
+        {filteredTasks.map((task) => (
+          <TaskCard
+            key={task.id}
+            task={task}
+            isExpanded={expandedTaskId === task.id}
+            onToggle={() =>
+              setExpandedTaskId(expandedTaskId === task.id ? null : task.id)
+            }
+            platform={undefined}
+          />
+        ))}
+      </div>
+
+      {filteredTasks.length === 0 && (
+        <div className="flex flex-col items-center justify-center py-16">
+          <Ticket className="h-10 w-10 text-muted-foreground mb-3" />
+          <p className="text-sm text-muted-foreground">沒有符合篩選的任務</p>
+        </div>
+      )}
     </div>
   );
 }
